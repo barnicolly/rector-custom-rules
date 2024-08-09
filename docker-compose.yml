@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+      args:
+        - USER_NAME=${USER_NAME}
+        - USER_ID=${USER_ID}
+        - USER_GROUP_NAME=${USER_GROUP_NAME}
+        - USER_GROUP_ID=${USER_GROUP_ID}
+      labels:
+        dev: true
+    volumes:
+      - ./:/var/www/html
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./docker/php/conf.d/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    environment:
+      - PHP_IDE_CONFIG=serverName=docker
+      - XDEBUG_CONFIG=${XDEBUG_CONFIG}
+      - XDEBUG_MODE=${XDEBUG_MODE}
+    networks:
+      - network
+
+networks:
+  network:

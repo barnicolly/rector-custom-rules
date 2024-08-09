@@ -1,0 +1,10 @@
+.idea
+# Not commiting composer.lock as this is a library project
+composer.lock
+# Dependencies
+vendor
+# PHPUnit
+.phpunit.cache/test-results
+
+.env
+auth.json
